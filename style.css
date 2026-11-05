@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: url('assets/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.game-container {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  width: 550px;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.result-banner {
+  background-color: rgba(255, 226, 111, 0.8);
+  padding: 16px;
+  border-radius: 14px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.hands {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 100px;
+  margin-bottom: 30px;
+}
+
+.player-hand,
+.computer-hand {
+  width: 120px;
+  display: inline-block;
+}
+
+.computer-hand {
+  transform: scaleX(-1);
+}
+
+.versus {
+  font-size: 28px;
+  color: #ffffff;
+}
+
+.wiggle-left {
+  animation: wiggleLeft 0.5s infinite alternate;
+}
+
+.wiggle-right {
+  animation: wiggleRight 0.5s infinite alternate;
+}
+
+@keyframes wiggleLeft {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(10deg); }
+}
+
+@keyframes wiggleRight {
+  0% { transform: scaleX(-1) rotate(0deg); }
+  100% { transform: scaleX(-1) rotate(-10deg); }
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  font-size: 16px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.option-btn {
+  background-color: rgba(255, 255, 255, 0.39);
+  border: none;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  font-size: 38px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.option-btn:hover {
+  background-color: rgb(236, 236, 236);
+}
+
+.label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 8px;
+  color: #ffffff;
+}
+
+.emoji-rain {
+  position: fixed;
+  font-size: 90px;
+  top: -100px;
+  animation: fall 2.5s linear forwards;
+  pointer-events: none;
+  z-index: 999;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(120vh); opacity: 0; }
+}

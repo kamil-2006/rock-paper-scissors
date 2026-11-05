@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="game-container">
+    <div class="result-banner" id="result">Let's Play! Rock Paper Scissor..</div>
+
+    <div class="hands">
+      <div id="player-hand" class="player-hand">✊</div>
+      <div class="versus">VS</div>
+      <div id="computer-hand" class="computer-hand">✊</div>
+    </div>
+
+    <div class="scoreboard">
+      <div>Won: <span id="wins">0</span></div>
+      <div>Draw: <span id="draws">0</span></div>
+      <div>Lost: <span id="losses">0</span></div>
+    </div>
+
+    <div class="options">
+      <div>
+        <button class="option-btn" onclick="play('rock')">✊</button>
+        <div class="label">Rock</div>
+      </div>
+      <div>
+        <button class="option-btn" onclick="play('paper')">✋</button>
+        <div class="label">Paper</div>
+      </div>
+      <div>
+        <button class="option-btn" onclick="play('scissors')">✌</button>
+        <div class="label">Scissors</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const playerHand = document.getElementById("player-hand");
+    const computerHand = document.getElementById("computer-hand");
+    const resultText = document.getElementById("result");
+    let wins = 0, draws = 0, losses = 0;
+
+    function play(playerChoice) {
+      const choices = ["rock", "paper", "scissors"];
+      const emojis = {
+        rock: "✊",
+        paper: "✋",
+        scissors: "✌"
+      };
+
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+      playerHand.innerText = emojis[playerChoice];
+      computerHand.innerText = emojis[computerChoice];
+
+      // Wiggle animation
+      playerHand.classList.remove("wiggle-left");
+      computerHand.classList.remove("wiggle-right");
+      void playerHand.offsetWidth;
+      void computerHand.offsetWidth;
+      playerHand.classList.add("wiggle-left");
+      computerHand.classList.add("wiggle-right");
+
+      setTimeout(() => {
+        playerHand.classList.remove("wiggle-left");
+        computerHand.classList.remove("wiggle-right");
+      }, 600);
+
+      // Game logic
+      let result;
+      if (playerChoice === computerChoice) {
+        result = "Draw! 😑";
+        draws++;
+        document.getElementById("draws").innerText = draws;
+        emojiRain(["😑"]);
+      } else if (
+        (playerChoice === "rock" && computerChoice === "scissors") ||
+        (playerChoice === "paper" && computerChoice === "rock") ||
+        (playerChoice === "scissors" && computerChoice === "paper")
+      ) {
+        result = "You Won! 🥳";
+        wins++;
+        document.getElementById("wins").innerText = wins;
+        emojiRain(["🥳"]);
+      } else {
+        result = "You Lost! 😔";
+        losses++;
+        document.getElementById("losses").innerText = losses;
+        emojiRain(["😔"]);
+      }
+
+      resultText.innerText = result;
+    }
+
+    function emojiRain(emojiArray) {
+      for (let i = 0; i < 25; i++) {
+        const drop = document.createElement("div");
+        drop.className = "emoji-rain";
+        drop.innerText = emojiArray[Math.floor(Math.random() * emojiArray.length)];
+        drop.style.left = Math.random() * 100 + "vw";
+        drop.style.animationDuration = (1.5 + Math.random()).toFixed(2) + "s";
+        document.body.appendChild(drop);
+        setTimeout(() => drop.remove(), 3000);
+      }
+    }
+  </script>
+
+</body>
+</html>
